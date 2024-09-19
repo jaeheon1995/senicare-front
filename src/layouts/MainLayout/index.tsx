@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
-import { useCookies } from 'react-cookie';
+import React, { useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router';
-import { ACCESS_TOKEN, CS_ABSOLUTE_PATH, CS_DETAIL_PATH, CS_PATH, HR_ABSOLUTE_PATH, HR_PATH, MM_ABSOLUTE_PATH, MM_PATH, ROOT_ABSOLUTE_PATH } from 'src/constants';
 import './style.css';
+import { useCookies } from 'react-cookie';
+import { ACCESS_TOKEN, AUTH_ABSOLUTE_PATH, CS_ABSOLUTE_PATH, CS_DETAIL_PATH, CS_PATH, HR_ABSOLUTE_PATH, HR_PATH, MM_ABSOLUTE_PATH, MM_PATH, ROOT_ABSOLUTE_PATH } from 'src/constants';
 
 // component: 로고 컴포넌트 //
 function Logo() {
@@ -39,7 +39,7 @@ function Top() {
     // event handler: 로그아웃 버튼 클릭 이벤트 처리 //
     const onLogoutButtonClickHandler = () => {
         removeCookie(ACCESS_TOKEN, { path: ROOT_ABSOLUTE_PATH });
-        navigator(CS_DETAIL_PATH(10));
+        navigator(AUTH_ABSOLUTE_PATH);
     };
 
     // render: 상단 컴포넌트 //
