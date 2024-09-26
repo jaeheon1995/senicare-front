@@ -1,11 +1,11 @@
 import axios, { AxiosResponse } from "axios";
 import { IdCheckRequestDto, SignInRequestDto, SignUpRequestDto, TelAuthCheckRequestDto, TelAuthRequestDto } from "./dto/request/auth";
+import { PatchToolRequestDto, PostToolRequestDto } from "./dto/request/tool";
 import { ResponseDto } from "./dto/response";
 import { SignInResponseDto } from "./dto/response/auth";
-import { GetSignInResponseDto } from "./dto/response/nurse";
-import { PatchToolRequestDto, PostToolRequestDto } from "./dto/request/tool";
-import { GetToolListResponseDto, GetToolResponseDto } from "./dto/response/tool";
 import { GetCustomerListResponseDto } from "./dto/response/customer";
+import { GetSignInResponseDto } from "./dto/response/nurse";
+import { GetToolListResponseDto, GetToolResponseDto } from "./dto/response/tool";
 
 // variable: API URL 상수 //
 const SENICARE_API_DOMAIN = 'http://localhost:4000';
@@ -33,6 +33,7 @@ const DELETE_TOOL_API_URL = (toolNumber: number | string) => `${TOOL_MODULE_URL}
 const CUSTOMER_MODULE_URL = `${SENICARE_API_DOMAIN}/api/v1/customer`;
 
 const GET_CUSTOMER_LIST_API_URL = `${CUSTOMER_MODULE_URL}`;
+const DELETE_CUSTOMER_API_URL = (customerNumber: number | string) => `${CUSTOMER_MODULE_URL}/${customerNumber}`;
 
 // function: Authorizarion Bearer 헤더 //
 const bearerAuthorization = (accessToken: string) => ({ headers: { 'Authorization': `Bearer ${accessToken}` } })
@@ -142,6 +143,14 @@ export const deleteToolRequest = async (toolNumber: number | string, accessToken
 export const getCustomerListRequest = async (accessToken: string) => {
     const responseBody = await axios.get(GET_CUSTOMER_LIST_API_URL, bearerAuthorization(accessToken))
         .then(responseDataHandler<GetCustomerListResponseDto>)
+        .catch(responseErrorHandler);
+    return responseBody;
+};
+
+// function: delete customer 요청 함수 //
+export const deleteCustomerRequest = async (customerNumber: number | string, accessToken: string) => {
+    const responseBody = await axios.delete(DELETE_CUSTOMER_API_URL(customerNumber), bearerAuthorization(accessToken))
+        .then(responseDataHandler<ResponseDto>)
         .catch(responseErrorHandler);
     return responseBody;
 };
