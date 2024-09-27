@@ -1,16 +1,16 @@
-import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router';
-import { deleteCustomerRequest, getCustomerListRequest } from 'src/apis';
-import { ResponseDto } from 'src/apis/dto/response';
-import { GetCustomerListResponseDto } from 'src/apis/dto/response/customer';
-import Pagination from 'src/components/Pagination';
-import { ACCESS_TOKEN, CS_DETAIL_ABSOLUTE_PATH, CS_UPDATE_ABSOLUTE_PATH, CS_WRITE_ABSOLUTE_PATH } from 'src/constants';
-import { usePagination } from 'src/hooks';
-import { useSignInUserStore } from 'src/stores';
-import { Customer } from 'src/types';
-import { calculateAge } from 'src/utils';
+import React, { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import './style.css';
+import { usePagination } from 'src/hooks';
+import Pagination from 'src/components/Pagination';
+import { Customer } from 'src/types';
+import { useSignInUserStore } from 'src/stores';
+import { useCookies } from 'react-cookie';
+import { ACCESS_TOKEN, CS_DETAIL_ABSOLUTE_PATH, CS_UPDATE_ABSOLUTE_PATH, CS_WRITE_ABSOLUTE_PATH } from 'src/constants';
+import { deleteCustomerRequest, getCustomerListRequest } from 'src/apis';
+import { GetCustomerListResponseDto } from 'src/apis/dto/response/customer';
+import { ResponseDto } from 'src/apis/dto/response';
+import { calculateAge } from 'src/utils';
+import { useNavigate } from 'react-router';
 
 // interface: 고객 리스트 아이템 컴포넌트 Properties //
 interface TableRowProps {
@@ -116,7 +116,7 @@ export default function CS() {
         setTotalList, initViewList, ...paginationProps
     } = usePagination<Customer>();
 
-    //  function: 네비게이터 함수 //
+    // function: 네비게이터 함수 //
     const navigator = useNavigate();
 
     // function: customer list 불러오기 함수 //
