@@ -10,7 +10,7 @@ import { GetChargedCustomerResponseDto, GetNurseListResponseDto, GetNurseRespons
 import { GetToolListResponseDto, GetToolResponseDto } from "./dto/response/tool";
 
 // variable: API URL 상수 //
-const SENICARE_API_DOMAIN = 'http://localhost:4000';
+const SENICARE_API_DOMAIN = process.env.REACT_APP_API_URL;
 
 const AUTH_MODULE_URL = `${SENICARE_API_DOMAIN}/api/v1/auth`;
 
